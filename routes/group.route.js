@@ -71,6 +71,22 @@ router.post("/addGroupItem/:groupId", async (req, res) => {
   }
 });
 
+// Route to delete a group
+router.delete("/deleteGroup/:groupId", async (req, res) => {
+  const { groupId } = req.params;
+  try {
+    const deletedGroup = await Group.findByIdAndDelete(groupId);
+    if (!deletedGroup) {
+      return res.status(404).json({ error: "Group not found" });
+    }
+    res.status(200).json({ success: true, message: "Group deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting group:", error);
+    res.status(500).json({ error: "An error occurred while deleting the group" });
+  }
+});
+
+
 // Route to delete an item from a group
 router.get("/deleteGroupItem/:groupId/:itemId", async (req, res) => {
   const { groupId, itemId } = req.params;
