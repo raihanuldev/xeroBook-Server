@@ -7,7 +7,7 @@ const bankModel = require("../models/bank.model");
 
 router.post("/addCustomer", async (req, res) => {
   const { formData } = req.body;
-  console.log(formData);
+  // console.log(formData);
   try {
     const result = await customerModel.create({
       contactName: formData.step1.contactName,
